@@ -1,6 +1,8 @@
 <template>
   <section class="new-comment">
     <div class="container">
+      <!-- message -->
+      <message v-if="message" :message="message" />
       <form @submit.prevent="onSubmit" class="new-comment-form">
         <!-- name -->
         <appInput v-model="comment.name">Name: </appInput>
@@ -16,21 +18,21 @@
 </template>
 
 <script>
+import message from '@/components/UI/Message.vue';
 import appButton from '@/components/UI/Controls/Button.vue';
 import appInput from '@/components/UI/Controls/Input.vue';
 import appTextarea from '@/components/UI/Controls/Textarea.vue';
 
 export default {
   components: {
+    message,
     appButton,
     appInput,
     appTextarea
   },
-  components: {
-    appButton
-  },
   data() {
     return {
+      message: null,
       comment: {
         name: '',
         text: ''
@@ -39,7 +41,10 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log(this.comment)
+      console.log(this.comment);
+      this.message = 'Submited!';
+      this.comment.name = '';
+      this.comment.text = '';
     }
   }
 }

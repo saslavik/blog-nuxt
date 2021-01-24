@@ -3,7 +3,8 @@
     <Header />
     <div class="wrapper-content wrapper-content--fixed">
       <Intro title="Admin page" >
-        <nuxt-link to="/admin" class="link linkWhite" > Admin </nuxt-link>
+        <nuxt-link to="/admin" class="link linkWhite "> Admin </nuxt-link>
+        <nuxt-link to="/admin/new-post" class="link linkWhite" > New Post </nuxt-link>
       </Intro>
       <Nuxt />
     </div>

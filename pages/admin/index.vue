@@ -1,14 +1,10 @@
 <template>
-  <div class="wrapper-content wrapper-content--fixed">
-    <div class="container">
-      <Intro title="My posts: "/>
-      <PostsList :posts="posts" />
-    </div>
-  </div>
+  <PostsList :posts="posts" />
 </template>
 
 <script>
 export default {
+  layout: 'admin',
   data() {
     return {
       posts: [

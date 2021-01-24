@@ -3,7 +3,7 @@
     <section class="about">
       <div class="container">
         <h1 class="title">About my blog: </h1>
-        <intro title="Lorem ipsum" />
+        <Intro title="Lorem ipsum" />
         <p>Далеко-далеко за словесными горами в стране гласных и согласных живут, рыбные тексты. На берегу текстов, свою, жизни снова сих пояс строчка агентство рот, великий взобравшись эта коварный рыбными переписали пор путь сбить живет.</p>
         <img src="@/assets/img/article.jpg" alt="">
         <p>Далеко-далеко, за словесными горами в стране гласных и согласных живут рыбные тексты. Своих коварных рукописи живет, грустный грамматики назад ему он там щеке моей себя. Первую, толку маленькая. Буквенных, то! Курсивных, повстречался.</p>
@@ -12,16 +12,6 @@
     </section>
   </div>
 </template>
-
-<script>
-import intro from '@/components/UI/Intro.vue';
-
-export default {
-  props: {
-    intro
-  }
-}
-</script>
 
 <style lang="scss">
 .about {

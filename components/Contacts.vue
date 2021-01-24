@@ -3,19 +3,19 @@
     <div class="container">
       <h2 class="title">Contact me!</h2>
       <!-- message -->
-      <message v-if="message" :message="message" />
+      <Message v-if="message" :message="message" />
 
       <form @submit.prevent="onSubmit" class="contact-form">
         <!-- name -->
 
-        <appInput v-model="user.name" type="text">Name: </appInput>
+        <AppInput v-model="user.name" type="text">Name: </AppInput>
         <!-- email -->
-        <appInput v-model="user.email" type="email"> Email: </appInput>
+        <AppInput v-model="user.email" type="email"> Email: </AppInput>
         <!-- textarea -->
-        <appTextarea v-model="user.text">Text: </appTextarea>
+        <AppTextarea v-model="user.text">Text: </AppTextarea>
         <!-- buttons -->
         <div class="controls">
-          <appButton class="btnWhite"> Submit!!! </appButton>
+          <AppButton class="btnWhite"> Submit!!! </AppButton>
         </div>
       </form>
     </div>
@@ -23,18 +23,7 @@
 </template>
 
 <script>
-import appButton from '@/components/UI/Controls/Button.vue';
-import message from '@/components/UI/Message.vue';
-import appInput from '@/components/UI/Controls/Input.vue';
-import appTextarea from '@/components/UI/Controls/Textarea.vue';
-
 export default {
-  components: {
-    appButton,
-    message,
-    appInput,
-    appTextarea
-  },
   data() {
     return {
       message: null,

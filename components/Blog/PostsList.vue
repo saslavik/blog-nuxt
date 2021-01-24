@@ -4,6 +4,7 @@
       <div class="posts__wrapper">
         <postPreview
         v-for="post in posts" :key="post.id"
+        :admin="admin"
         :post="post"
          />
       </div>
@@ -19,6 +20,10 @@ export default {
     posts: {
       type: Array,
       required: true
+    },
+    admin: {
+      type: Boolean,
+      default: false
     }
   },
   components: {

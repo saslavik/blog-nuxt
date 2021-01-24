@@ -18,9 +18,15 @@
 
 <script>
 export default {
+  props: {
+    postEdit: {
+      type: Object,
+      required: false,
+    }
+  },
   data() {
     return {
-      post: {
+      post: this.postEdit ? {...this.postEdit} : {
         title: '',
         descr: '',
         img: '',
@@ -30,7 +36,7 @@ export default {
   },
   methods: {
     cancel() {
-      this.$router.push('/admin/');
+      this.$router.push('/admin');
     },
     onSubmit() {
       this.$emit('submit', this.post);

@@ -1,5 +1,6 @@
 <template>
-  <newPostForm @submit="onSubmit"/>
+  <newPostForm
+  @submit="onSubmit"/>
 </template>
 
 <script>

@@ -5,6 +5,9 @@
       <Intro title="My lasts posts: "/>
       <PostsList :posts="posts" />
       <contacts />
+      <p>
+
+      </p>
     </div>
   </div>
 </template>
@@ -22,14 +25,7 @@ export default {
     return new Promise ((resolve, reject) => {
       setTimeout(() => {
         resolve({
-          posts: [
-            {
-              id: 1,
-              title: '1 post',
-              descr:'Далеко-далеко за словесными, горами в стране гласных и согласных живут рыбные тексты.',
-              img: 'https://lawnuk.com/wp-content/uploads/2016/08/sprogs-dogs.jpg'
-            }
-          ]
+          posts: []
         })
     }, 1500)
     })

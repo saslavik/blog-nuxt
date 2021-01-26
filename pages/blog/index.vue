@@ -2,16 +2,16 @@
   <div class="wrapper-content wrapper-content--fixed">
     <div class="container">
       <Intro title="My posts: "/>
-      <PostsList :posts="posts" />
+      <PostsList :posts="postsLoaded" />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      posts: []
+  computed: {
+    postsLoaded() {
+      return this.$store.getters.getPostsLoaded;
     }
   }
 }

@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import newPostForm from '@/components/admin/newPostForm.vue'
 
 export default {
@@ -12,21 +13,21 @@ export default {
     newPostForm
   },
   layout: 'admin',
-  data() {
-    return {
-      post: {
-        id: 1,
-        title: '1 post',
-        descr:'Далеко-далеко за словесными, горами в стране гласных и согласных живут рыбные тексты.',
-        img: 'https://lawnuk.com/wp-content/uploads/2016/08/sprogs-dogs.jpg',
-        content: 'Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Путь решила, великий он выйти ему все, последний возвращайся эта коварный, переулка снова рукописи буквоград меня его рукопись даже наш.'
-      }
-    }
+  asyncData(contex) {
+    return axios.get(`https://blog-nuxt-62417-default-rtdb.firebaseio.com/posts/${contex.params.postId}.json`)
+      .then(res => {
+        return {
+          post: { ...res.data, id: contex.params.postId }
+        }
+      })
+      .catch(e => contex.error(e))
   },
   methods: {
     onSubmit(post) {
-      console.log('Post Editing');
-      console.log(post);
+      this.$store.dispatch('editPost', post)
+        .then(() => {
+          this.$router.push('/admin')
+        })
     }
   }
 }

@@ -3,7 +3,7 @@
     <div class="container">
       <promo />
       <Intro title="My lasts posts: "/>
-      <PostsList :posts="posts" />
+      <PostsList :posts="postsLoaded" />
       <contacts />
       <p>
 
@@ -21,37 +21,25 @@ export default {
     promo,
     contacts
   },
-  asyncData(contex) {
-    return new Promise ((resolve, reject) => {
-      setTimeout(() => {
-        resolve({
-          posts: []
-        })
-    }, 1500)
-    })
-    .then(data => {
-      return data
-    })
-    .catch(e => {
-      contex.error(e);
-    })
-  },
-  data() {
-    return {
-      posts: []
+  // asyncData(contex) {
+  //   return new Promise ((resolve, reject) => {
+  //     setTimeout(() => {
+  //       resolve({
+  //         posts: []
+  //       })
+  //   }, 1500)
+  //   })
+  //   .then(data => {
+  //     return data
+  //   })
+  //   .catch(e => {
+  //     contex.error(e);
+  //   })
+  // },
+  computed: {
+    postsLoaded() {
+      return this.$store.getters.getPostsLoaded;
     }
-  },
-  created() {
-    setTimeout(() => {
-      this.posts = [
-        {
-          id: 1,
-          title: '1 post',
-          descr:'Далеко-далеко за словесными, горами в стране гласных и согласных живут рыбные тексты.',
-          img: 'https://lawnuk.com/wp-content/uploads/2016/08/sprogs-dogs.jpg'
-        }
-      ]
-    }, 1500)
   }
 }
 </script>

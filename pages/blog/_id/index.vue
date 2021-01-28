@@ -23,6 +23,7 @@ export default {
       axios.get(`https://blog-nuxt-62417-default-rtdb.firebaseio.com/posts/${context.params.id}.json`),
       axios.get(`https://blog-nuxt-62417-default-rtdb.firebaseio.com/comments.json`)
     ])
+    
     let commentsArrayRes = Object.values(comments.data)
       .filter(comment => (comment.postId === context.params.id) && comment.publish);
 

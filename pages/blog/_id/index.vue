@@ -2,11 +2,12 @@
   <div class="wrapper-content wrapper-content--fixed">
     <post :post="post" />
     <comments :comments="comments" />
-    <new-comment />
+    <new-comment :postId="$route.params.id" />
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 import post from '@/components/Blog/Post.vue';
 import comments from '@/components/Comments/Comments.vue';
 import newComment from '@/components/Comments/NewComment.vue';
@@ -17,19 +18,17 @@ export default {
     comments,
     newComment
   },
-  data() {
+  async asyncData (context) {
+    let [post, comments] = await Promise.all([
+      axios.get(`https://blog-nuxt-62417-default-rtdb.firebaseio.com/posts/${context.params.id}.json`),
+      axios.get(`https://blog-nuxt-62417-default-rtdb.firebaseio.com/comments.json`)
+    ])
+    let commentsArrayRes = Object.values(comments.data)
+      .filter(comment => (comment.postId === context.params.id) && comment.publish);
+
     return {
-      post: {
-        id: 1,
-        title: '1 post',
-        descr:'Далеко-далеко за словесными, горами в стране гласных и согласных живут рыбные тексты.',
-        img: 'https://lawnuk.com/wp-content/uploads/2016/08/sprogs-dogs.jpg',
-        content: 'Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Путь решила, великий он выйти ему все, последний возвращайся эта коварный, переулка снова рукописи буквоград меня его рукопись даже наш.'
-      },
-      comments: [
-        {name: 'Alex', text: 'Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Рыбными, вопрос послушавшись семь вскоре алфавит наш его собрал до свое снова строчка великий запятых путь, взобравшись, осталось скатился буквоград.'},
-        {name: 'John', text: 'Далеко-далеко за словесными, горами в стране гласных и согласных живут рыбные тексты. Текстами несколько что океана повстречался страна, взобравшись рукопись ручеек. Повстречался снова маленький приставка города рыбного моей, своих рукописи что речью?'}
-      ]
+      post: post.data,
+      comments: commentsArrayRes
     }
   }
 }

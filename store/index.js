@@ -32,7 +32,16 @@ export const actions = {
       commit('setPosts', postsArray);
     })
     .catch(e => console.log(e))
-    },
+  },
+  authUser({commit}, authData) {
+    console.log(authData)
+    const key = 'AIzaSyCu77Ngra3M7e7zzB2eVyriMUQsRGoKgAo'
+    return axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${key}`, {
+      email: authData.email,
+      password: authData.password,
+      returnSecureToken: true
+    });
+  },
   addPost ({commit}, post) {
     return axios.post('https://blog-nuxt-62417-default-rtdb.firebaseio.com/posts.json', post)
       .then(res => {

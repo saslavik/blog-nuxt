@@ -6,10 +6,10 @@
           <td><span>{{ comment.name }}</span></td>
           <td><span>{{ comment.text }}</span></td>
           <td>
-            <span v-if="comment.status" class="status true">Publish</span>
+            <span v-if="comment.publish" class="status true">Publish</span>
             <span v-else class="status false">Hiden</span>
           </td>
-          <td><span @click="changeComment(comment.id)" class="link">Change status</span></td>
+          <td><span @click="changeComment(comment)" class="link">Change status</span></td>
           <td><span @click="deleteComment(comment.id)" class="link">Delete</span></td>
         </tr>
       </tbody>
@@ -31,22 +31,33 @@ export default {
       comments: []
     }
   },
-  created() {
-    axios.get('https://blog-nuxt-62417-default-rtdb.firebaseio.com/comments.json')
-      .then((res) => {
-        let commentsArray = []
-        Object.keys(res.data).forEach(key => {
-          const comment = res.data[key]
-          commentsArray.push
-        })
-      })
+  mounted() {
+    this.loadComment()
   },
   methods: {
-    changeComment(id) {
-      console.log(`Change comment id - ${id}`)
+    loadComment() {
+      axios
+        .get('https://blog-nuxt-62417-default-rtdb.firebaseio.com/comments.json')
+        .then((res) => {
+          let commentsArray = []
+          Object.keys(res.data).forEach(key => {
+            const comment = res.data[key]
+            commentsArray.push({...comment, id:key})
+          })
+          this.comments = commentsArray
+        })
+    },
+    changeComment(comment) {
+      comment.publish = !comment.publish;
+      axios
+        .put(`https://blog-nuxt-62417-default-rtdb.firebaseio.com/comments/${comment.id}.json`, comment)
     },
     deleteComment(id) {
-      console.log(`Delete comment id - ${id}`)
+      axios
+        .delete(`https://blog-nuxt-62417-default-rtdb.firebaseio.com/comments/${id}.json`)
+        .then((res) => {
+          this.loadComment()
+        })
     }
   }
 }

@@ -24,9 +24,15 @@ export default {
   },
   methods: {
     onSubmit() {
+      console.log(this.user)
+      this.$store.dispatch('authUser', this.user)
+        .then((res) => {
+          console.log(res)
+          this.user.email = '',
+          this.user.password = ''
+        })
       // reset
-      this.user.email = '',
-      this.user.password = ''
+
     }
   }
 }
@@ -35,6 +41,7 @@ export default {
 <style lang="scss">
 .auth {
   text-align: center;
+  justify-content: center;
 }
 .auth__form {
   display: flex;
@@ -42,7 +49,7 @@ export default {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 40vh;
+  height: 60vh;
   input {
     min-width: 400px;
   }

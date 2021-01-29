@@ -27,9 +27,12 @@ export default {
       console.log(this.user)
       this.$store.dispatch('authUser', this.user)
         .then((res) => {
-          console.log(res)
+          this.$router.push('/admin')
+        })
+        .catch(e => {
           this.user.email = '',
           this.user.password = ''
+          console.log(e);
         })
       // reset
 

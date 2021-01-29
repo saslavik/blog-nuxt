@@ -13,6 +13,24 @@
   </div>
 </template>
 
+<script>
+export default {
+  head() {
+    let title = 'About My SSR blog!',
+        descr = 'About My SSR blog! With Nuxt.js!',
+        type = 'site'
+    return {
+      title: title,
+      meta: [
+        { hid: 'og:title', name: 'og:title', content: title },
+        { hid: 'description', name: 'description', content: descr },
+        { hid: 'og:description', name: 'og:description', content: descr },
+        { hid: 'og:type', name: 'og:type', content: type }
+      ]
+    }
+  },
+}
+</script>
 <style lang="scss">
 .about {
   text-align: center;

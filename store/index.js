@@ -18,6 +18,9 @@ export const mutations = {
   },
   setToken(state, token) {
     state.token = token;
+  },
+  destroyToken(state) {
+    state.token = null;
   }
 }
 
@@ -44,6 +47,9 @@ export const actions = {
       commit('setToken', res.data.idToken)
     })
     .catch(e => console.log(e));
+  },
+  logoutUser({commit}) {
+    commit('destroyToken')
   },
   addPost ({commit}, post) {
     return axios.post('https://blog-nuxt-62417-default-rtdb.firebaseio.com/posts.json', post)
